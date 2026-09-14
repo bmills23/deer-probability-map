@@ -61,7 +61,7 @@ deer-probability-map/
     ├── test_hunting_access.py      # copied verbatim
     ├── test_roads.py                # copied verbatim
     ├── test_snow.py                  # copied verbatim
-    ├── test_terrain.py                # copied + 4 functions edited
+    ├── test_terrain.py                # copied + 5 functions edited
     ├── test_landcover.py               # copied + 1 function edited, 1 added
     ├── test_deer_range.py               # new, adapted from test_elk_range.py
     ├── test_probability.py               # copied (comment reword only)
@@ -235,19 +235,20 @@ caveat for its own constants.
 
 **Files:**
 - Create: `terrain.py`
-- Modify: `tests/test_terrain.py` (4 of 13 test functions)
+- Modify: `tests/test_terrain.py` (5 of 15 test functions)
 
 **Interfaces:**
 - Consumes: `geo_utils.KM_PER_DEG`, `net.SESSION` (Task 2).
 - Produces: `terrain.fetch_elevation_grid`, `.compute_slope_aspect`, `.elevation_band_score(elev_m, center_m=2440.0, half_width_m=460.0, shift_m=0.0)`, `.aspect_score(aspect_deg, favor_deg=180.0)`, `.slope_score`, `.habitat_components(elev_m, aspect_deg, snow_shift_m=0.0, favor_aspect_deg=180.0, slope_deg=None, cover_score=None, ...)`, `.habitat_score`. Same signatures as elk's `terrain.py`, only the default values of `center_m`, `half_width_m`, and `favor_aspect_deg` change.
 
-- [ ] **Step 1: Copy the module and its test file**
+- [ ] **Step 1: Copy the module, its test file, and the fixture it needs**
 
 ```bash
 cd ~/repos/deer-probability-map
 SRC=~/repos/elk-probability-map
 cp $SRC/terrain.py .
 cp $SRC/tests/test_terrain.py tests/
+cp $SRC/tests/fixtures/terrarium_tile_11_427_785.png tests/fixtures/
 ```
 
 - [ ] **Step 2: Run the copied tests to see which fail against the new constants (they haven't changed yet, so all should still pass at this point)**
@@ -257,9 +258,9 @@ source .venv/bin/activate
 pytest tests/test_terrain.py -v
 ```
 
-Expected: all 13 pass (nothing changed yet).
+Expected: all 15 pass (nothing changed yet).
 
-- [ ] **Step 3: Edit the 4 tests that depend on elk's specific elevation/aspect constants**
+- [ ] **Step 3: Edit the 5 tests that depend on elk's specific elevation/aspect constants**
 
 In `tests/test_terrain.py`, replace:
 
@@ -399,8 +400,8 @@ constants terrain.py uses.
 pytest tests/test_terrain.py -v
 ```
 
-Expected: the 4 edited tests FAIL (terrain.py still has `center_m=2895.0`,
-`favor_deg=0.0`); the other 9 still PASS.
+Expected: the 5 edited tests FAIL (terrain.py still has `center_m=2895.0`,
+`favor_deg=0.0`); the other 10 still PASS.
 
 - [ ] **Step 5: Retune terrain.py's module docstring and defaults**
 
@@ -489,12 +490,12 @@ def habitat_components(elev_m, aspect_deg, snow_shift_m=0.0, favor_aspect_deg=18
 pytest tests/test_terrain.py -v
 ```
 
-Expected: all 13 pass.
+Expected: all 15 pass.
 
 - [ ] **Step 7: Commit**
 
 ```bash
-git add terrain.py tests/test_terrain.py
+git add terrain.py tests/test_terrain.py tests/fixtures/terrarium_tile_11_427_785.png
 git commit -m "Retune terrain.py habitat scoring for mule deer (lower elevation band, south-facing aspect)"
 ```
 
