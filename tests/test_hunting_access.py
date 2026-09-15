@@ -189,7 +189,7 @@ def test_classify_access_cpw_only_polygon_with_no_padus_record_is_open():
 
 
 def test_classify_access_excludes_land_outside_the_gmu_boundary():
-    """Same GMU-boundary-intersection fix as elk_map.combined_access_mask,
+    """Same GMU-boundary-intersection fix as deer_map.combined_access_mask,
     applied to all three tiers: land outside the unit's real boundary is
     never open or conditional, even if PAD-US/CPW cover it."""
     small_gmu = {"type": "Polygon", "coordinates": [[[0, 0], [0, 1], [1, 1], [1, 0], [0, 0]]]}

@@ -1,4 +1,4 @@
-"""Road/trailhead distance -- a security-cover proxy: elk push away from
+"""Road/trailhead distance -- a security-cover proxy: deer push away from
 vehicle access during rifle season."""
 
 import json
@@ -28,10 +28,10 @@ def fetch_road_segments(bbox, timeout=90, retries=3, backoff_s=20):
     behavior on a shared free resource, not a permanent failure.
 
     Still raises RuntimeError after exhausting retries -- that failure is
-    not swallowed here. elk_map.process_unit is responsible for catching
+    not swallowed here. deer_map.process_unit is responsible for catching
     it and degrading (security omitted, remaining weights renormalize),
     the same graceful-degradation pattern already used for the LANDFIRE
-    and elk-seasonal-range fetches."""
+    and deer-seasonal-range fetches."""
     lat_min, lat_max, lon_min, lon_max = bbox
     query = (
         f'[out:json][timeout:60];'

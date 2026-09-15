@@ -9,8 +9,8 @@ from requests.adapters import HTTPAdapter
 from urllib3.util.retry import Retry
 
 USER_AGENT = (
-    "Mozilla/5.0 (compatible; elk-probability-map/1.0; "
-    "+https://github.com/bryanmills/elk-probability-map)"
+    "Mozilla/5.0 (compatible; deer-probability-map/1.0; "
+    "+https://github.com/bmills23/deer-probability-map)"
 )
 HEADERS = {"User-Agent": USER_AGENT, "Accept": "application/json, image/png, */*"}
 

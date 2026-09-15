@@ -171,7 +171,7 @@ def classify_access(lats, lons, oa_polygons, ra_polygons, cpw_polygons, gmu_geom
 
     All three masks are intersected with gmu_geometry, not just the
     buffered bbox -- same boundary-correctness fix as
-    elk_map.combined_access_mask, applied here to all three tiers at
+    deer_map.combined_access_mask, applied here to all three tiers at
     once. Returns (open_mask, conditional_mask, closed_mask): bool grids
     shaped like the lats/lons meshgrid, mutually exclusive and
     exhaustive."""

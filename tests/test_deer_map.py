@@ -49,7 +49,7 @@ def test_fetch_security_score_degrades_to_none_when_roads_fetch_fails(monkeypatc
     existed, a failed Overpass fetch (roads.fetch_road_segments raises
     RuntimeError after exhausting its retries) propagated straight out of
     process_unit and aborted the whole run -- no map at all. Now it must
-    degrade the same way a failed LANDFIRE or elk-range fetch already
+    degrade the same way a failed LANDFIRE or deer-range fetch already
     does: security omitted (None), so compute_probability drops it from
     the blend and renormalizes the remaining weights, and the failure is
     printed so it isn't silent."""
