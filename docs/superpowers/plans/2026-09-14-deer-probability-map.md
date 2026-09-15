@@ -1437,14 +1437,20 @@ cp $SRC/render.py .
 cp $SRC/tests/test_render.py tests/
 ```
 
-- [ ] **Step 2: Run the copied tests (should all pass unmodified before any edits)**
+- [ ] **Step 2: Run the copied tests as a baseline**
 
 ```bash
 source .venv/bin/activate
 pytest tests/test_render.py -v
 ```
 
-Expected: all pass (nothing changed yet).
+Expected: a single collection-time `ModuleNotFoundError: No module named
+'elk_range'` — not a pass. render.py's very first line of difference
+from elk's version is `from elk_range import RANGE_TYPE_LABELS`, and this
+repo never had an `elk_range.py` module (only `deer_range.py`, from
+Task 6), so the freshly copied file can't even be imported yet. This is
+expected for a cross-repo copy, not a sign anything is wrong — Step 3's
+very first edit (the import rename) is what fixes it.
 
 - [ ] **Step 3: Edit render.py — import and constant/function renames**
 
@@ -2061,7 +2067,13 @@ Replace assertion strings:
 - `assert "raises the elk seasonal range factor's weight" not in html_without` → `assert "raises the deer seasonal range factor's weight" not in html_without`
 
 Replace the two remaining docstring/comment mentions:
-- `"""seasonal_range_score (elk_range.py) must be appended after the four` → `"""seasonal_range_score (deer_range.py) must be appended after the three`
+- `"""seasonal_range_score (elk_range.py) must be appended after the four` → `"""seasonal_range_score (deer_range.py) must be appended after the four`
+  (only the module name changes here — "the four" refers to
+  `HABITAT_SUBFACTOR_KEYS` (elevation/aspect/slope/cover), which is
+  unrelated to and unchanged by the deer-range layer count; an earlier
+  draft of this plan incorrectly said this should become "the three,"
+  which would have made the docstring self-contradictory against the
+  unchanged 4-entry `HABITAT_SUBFACTOR_KEYS` a few lines below it)
 - `a network failure can also reach it (elk_map.fetch_snow_conditions` → `a network failure can also reach it (deer_map.fetch_snow_conditions`
 
 - [ ] **Step 10: Run the tests again to verify they pass**
