@@ -3,9 +3,9 @@
 Estimate where a mule deer buck is likely to be in Colorado GMU 59
 during 2nd rifle season, from free public data, rendered as an
 interactive map. Sister app to
-[`elk-probability-map`](../elk-probability-map), reusing its
-architecture and rendering approach. GMU harvest stats are vendored from
-[`co-hunt-data`](../co-hunt-data) into `data/deer_harvest.csv` (see
+[`elk-probability-map`](https://github.com/bmills23/elk-probability-map),
+reusing its architecture and rendering approach. GMU harvest stats are
+vendored from `co-hunt-data` into `data/deer_harvest.csv` (see
 `harvest.py`).
 
 ## Honest scope
@@ -71,8 +71,8 @@ the status panel listing which factors were actually used.
 
 Same interaction model as elk-probability-map: a probability heatmap
 (viridis, masked to legally open land), click any cell to inspect its
-score breakdown, a status panel with harvest context (bucks/does/fawns,
-hunters, % success for 2nd rifle, most recent year -- 2023) and the
+score breakdown, a status panel with harvest context (bucks, hunters,
+% success for 2nd rifle, most recent year -- 2023) and the
 SNOTEL station used, a simulated snow-depth slider (8 precomputed levels,
 globally normalized so a genuinely worse unit renders dimmer rather than
 renormalizing back to full brightness), and a live NOAA NOHRSC snow-depth
@@ -105,8 +105,8 @@ for full design rationale.
 
 ## Known limitations
 
-- Elevation-band, aspect, and land-cover constants are a best-effort
-  domain assumption, not field-calibrated data.
+- Elevation-band, aspect, land-cover, and snow-elevation-shift constants
+  are a best-effort domain assumption, not field-calibrated data.
 - No Production Area (fawning habitat) layer exists in CPW's mule deer
   High Priority Habitat dataset, unlike elk's -- nothing is being
   silently dropped, the layer simply doesn't exist in this service.

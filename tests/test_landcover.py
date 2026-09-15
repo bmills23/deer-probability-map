@@ -116,6 +116,16 @@ def test_cover_suitability_score_dense_timber_scores_high():
     assert scores[2, 2] > 0.8
 
 
+def test_cover_suitability_score_moderate_timber_would_saturate_under_elks_threshold():
+    # 150 = tree cover 50%. Elk's old threshold (TREE_SECURITY_FULL_PCT=50.0)
+    # would already saturate this to 1.0; deer's higher threshold (65.0)
+    # should NOT saturate it yet. This pins the retune: it fails if
+    # TREE_SECURITY_FULL_PCT reverts to elk's 50.0.
+    v = np.full((5, 5), 150)
+    scores = cover_suitability_score(v)
+    assert scores[2, 2] == pytest.approx(50.0 / 65.0, abs=0.01)
+
+
 def test_cover_suitability_score_moderate_shrub_cover_scores_high_for_deer():
     # 225 = shrub cover 25%, at SHRUB_FORAGE_FULL_PCT -- mule deer are
     # primarily browsers, so even moderate (not dense) shrub cover should

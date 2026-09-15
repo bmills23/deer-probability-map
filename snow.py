@@ -67,6 +67,22 @@ def parse_latest_snow_depth(data_json):
     return None
 
 
+# max_shift_m is left at elk's value for this iteration (see the design
+# spec's Known Limitations -- snow-elevation-shift constants are flagged
+# as tunable, not yet retuned for deer). Worth knowing: elk's terrain.py
+# has half_width_m == max_shift_m (610 == 610), so at maximum simulated
+# snow depth the shifted and unshifted elevation bands share exactly
+# their outer edge. Deer's terrain.py narrowed half_width_m to 460
+# without revisiting max_shift_m here, so for deer max_shift_m (610) now
+# exceeds half_width_m (460) -- at maximum simulated snow, deer's
+# elevation sweet spot swings proportionally further than elk's does,
+# with much less overlap between the shifted and unshifted bands. This
+# may be a defensible species difference (deer are sometimes described
+# as making more dramatic elevation moves in response to snow than elk)
+# or simply an artifact of retuning one constant without the other --
+# flagged honestly rather than asserted either way. A future iteration
+# could narrow max_shift_m toward 460 to restore elk's 1:1 ratio if
+# field experience says that matters.
 def snow_elevation_shift_m(depth_in, max_shift_m=610.0, max_depth_in=40.0):
     if depth_in is None:
         return 0.0
